@@ -75,11 +75,11 @@ void ArrayPush(struct Array* arr,void* data)
 }
 void ArrayRemoveAt(struct Array* arr,unsigned int removeAt)
 {
-  if (removeAt>=arr->count||removeAt<0){
+  if (removeAt>=arr->count){
     fprintf(stderr,"ERROR:invalid index");
     exit(1);
   }
-  for (int i = removeAt;i<arr->count-1;i++)
+  for (unsigned int i = removeAt;i<arr->count-1;i++)
   {
     ArraySetElement(arr,i,ArrayGetElement(arr,i+1));
   }

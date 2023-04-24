@@ -2,7 +2,7 @@
 #define _GRID_H
 struct Grid{
   int cellsPerSide;
-  char* activeCells,*_tempactiveCells;
+  char* activeCells;
   struct Array *cellsMap,*borderMap;
   unsigned int* cellsElements;
   unsigned int cellsElementsCount;
@@ -16,5 +16,6 @@ void GridSetCell(struct Grid* grid,unsigned x,unsigned y,char value);
 char GridGetCell(struct Grid* grid,unsigned x,unsigned y);
 void GridSetCellsProc(struct Grid* grid,char (*cellProc)(struct Grid*,int,int));
 void GridCallProc(struct Grid* grid);
+void GridFree(struct Grid* grid);
 
 #endif // !_GRID_H

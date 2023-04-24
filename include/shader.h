@@ -12,7 +12,7 @@ struct Uniform
 };
 
 
-void UseShader(struct Shader* shader);
+void ShaderActivate(struct Shader* shader);
 
 struct Shader* Shader(const char* vspath,const char* fspath);
 
@@ -22,7 +22,7 @@ int IsShaderValid(struct Shader* shader);
 
 char* _GetShaderSrc(const char* path);
 
-void FreeShader(struct Shader* shader);
+void ShaderFree(struct Shader* shader);
 
 void ShaderSetSamplerIndex(struct Shader* shader , char* name,unsigned int index);
 

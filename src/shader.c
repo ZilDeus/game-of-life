@@ -31,11 +31,11 @@ int IsShaderValid(struct Shader* shader)
 
 void ShaderSetSamplerIndex(struct Shader* shader , char* name,unsigned int index)
 {
-	UseShader(shader);
+	ShaderActivate(shader);
 	glProgramUniform1i(shader->program_id,glGetUniformLocation(shader->program_id,name),index);
 }
 
-void UseShader(struct Shader* shader)
+void ShaderActivate(struct Shader* shader)
 {
 	glUseProgram(shader->program_id);
 }
@@ -86,7 +86,7 @@ char* _GetShaderSrc(const char* path)
 	return pointer;
 }
 
-void FreeShader(struct Shader* shader)
+void ShaderFree(struct Shader* shader)
 {
 	glDeleteProgram(shader->program_id);
 }
@@ -102,72 +102,72 @@ struct Uniform Uniform(struct Shader* shader,const char* name)
 
 void UniformSet1Float(struct Uniform uniform,float x)
 {
-	UseShader(uniform.shader);
+	ShaderActivate(uniform.shader);
 	glProgramUniform1f(uniform.shader->program_id,uniform.location,x);
 }
 
 void UniformSet2Float(struct Uniform uniform,float x,float y)
 {
-	UseShader(uniform.shader);
+	ShaderActivate(uniform.shader);
 	glProgramUniform2f(uniform.shader->program_id,uniform.location,x,y);
 }
 void UniformSet3Float(struct Uniform uniform,float x,float y,float z)
 {
-	UseShader(uniform.shader);
+	ShaderActivate(uniform.shader);
 	glProgramUniform3f(uniform.shader->program_id,uniform.location,x,y,z);
 }
 void UniformSet4Float(struct Uniform uniform,float x,float y,float z,float w)
 {
-	UseShader(uniform.shader);
+	ShaderActivate(uniform.shader);
 	glProgramUniform4f(uniform.shader->program_id,uniform.location,x,y,z,w);
 }
 
 void UniformSet1Int(struct Uniform uniform,int x)
 {
-	UseShader(uniform.shader);
+	ShaderActivate(uniform.shader);
 	glProgramUniform1i(uniform.shader->program_id,uniform.location,x);
 }
 void UniformSet2Int(struct Uniform uniform,int x,int y)
 {
-	UseShader(uniform.shader);
+	ShaderActivate(uniform.shader);
 	glProgramUniform2i(uniform.shader->program_id,uniform.location,x,y);
 }
 void UniformSet3Int(struct Uniform uniform,int x,int y,int z)
 {
-	UseShader(uniform.shader);
+	ShaderActivate(uniform.shader);
 	glProgramUniform3i(uniform.shader->program_id,uniform.location,x,y,z);
 }
 void UniformSet4Int(struct Uniform uniform,int x,int y,int z,int w)
 {
-	UseShader(uniform.shader);
+	ShaderActivate(uniform.shader);
 	glProgramUniform4i(uniform.shader->program_id,uniform.location,x,y,z,w);
 }
 
 
 void UniformSet1UInt(struct Uniform uniform,unsigned int x)
 {
-	UseShader(uniform.shader);
+	ShaderActivate(uniform.shader);
 	glProgramUniform1ui(uniform.shader->program_id,uniform.location,x);
 }
 void UniformSet2UInt(struct Uniform uniform,unsigned int x,unsigned int y)
 {
-	UseShader(uniform.shader);
+	ShaderActivate(uniform.shader);
 	glProgramUniform2ui(uniform.shader->program_id,uniform.location,x,y);
 }
 void UniformSet3UInt(struct Uniform uniform,unsigned int x,unsigned int y,unsigned int z)
 {
-	UseShader(uniform.shader);
+	ShaderActivate(uniform.shader);
 	glProgramUniform3ui(uniform.shader->program_id,uniform.location,x,y,z);
 }
 void UniformSet4UInt(struct Uniform uniform,unsigned int x,unsigned int y,unsigned int z,unsigned int w)
 {
-	UseShader(uniform.shader);
+	ShaderActivate(uniform.shader);
 	glProgramUniform4ui(uniform.shader->program_id,uniform.location,x,y,z,w);
 }
 
 void UniformSetMatrix(struct Uniform uniform,void* p)
 {
-	UseShader(uniform.shader);
+	ShaderActivate(uniform.shader);
 	glProgramUniformMatrix4fv(uniform.shader->program_id,uniform.location,1,0,p);
 }
 

@@ -17,7 +17,6 @@ struct Grid* Grid(int i)
     }
   }
   grid->activeCells= malloc(sizeof(unsigned int)*grid->cellsPerSide*grid->cellsPerSide);
-  grid->_tempactiveCells= malloc(sizeof(unsigned int)*grid->cellsPerSide*grid->cellsPerSide);
   for (int y=0;y<grid->cellsPerSide;y++)
   {
     for (int x=0;x<grid->cellsPerSide;x++)
@@ -92,4 +91,12 @@ void GridSetCell(struct Grid* grid,unsigned x,unsigned y,char value)
     return;
   grid->activeCells[(y*grid->cellsPerSide)+x] = value==0?0:1;
   grid->changed = 1;
+}
+void GridFree(struct Grid* grid)
+{
+  free(grid->activeCells);
+  free(grid->cellsElements);
+  ArrayFree(grid->cellsMap);
+  ArrayFree(grid->borderMap);
+  free(grid);
 }

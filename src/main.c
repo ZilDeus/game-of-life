@@ -20,7 +20,7 @@ float clamp(float f,float a,float b)
 {
   return f<a?a:b<f?b:f;
 }
-char testProc(struct Grid* grid,int x,int y)
+char GameOfLifeProc(struct Grid* grid,int x,int y)
 {
   char isAlive = GridGetCell(grid,x,y);
   int count = 0;
@@ -61,9 +61,9 @@ int main()
   struct VertexArray *gridVa,*borderVa;
   gridVa = VertexArray();
   borderVa = VertexArray();
-  int cellsPerRow = 20;
+  int cellsPerRow = 40;
   struct Grid* grid = Grid(cellsPerRow);
-  GridSetCellsProc(grid, testProc);
+  GridSetCellsProc(grid, GameOfLifeProc);
   VertexArrayAddBuffer(gridVa, 0,grid->cellsMap->data,grid->cellsMap->size*grid->cellsMap->count,grid->cellsMap->size, 0);
   VertexArrayFormatBufferElement(gridVa, 0, TYPE_FLOAT, 2);
   VertexArrayAddBuffer(gridVa, 1,grid->cellsElements,grid->cellsElementsCount * sizeof(unsigned int),sizeof(unsigned int), 0);
@@ -96,7 +96,7 @@ int main()
     if(glfwGetKey(win,GLFW_KEY_W))
       offsety+=deltaTime;
     if (glfwGetKey(win,GLFW_KEY_S) == GLFW_RELEASE)
-        mDown = 1;
+      mDown = 1;
     if (glfwGetKey(win,GLFW_KEY_S))
     {
       GridCallProc(grid);
@@ -117,13 +117,18 @@ int main()
     glfwSwapBuffers(win);
     glClear(GL_COLOR_BUFFER_BIT);
     VertexArrayBind(gridVa);
-    UseShader(shader);
-    glUniform1f(1,aspect);
+    ShaderActivate(shader);
+    glUniform3f(0,1.0f,1.0f,1.0f);
     glDrawElements(GL_TRIANGLES,grid->cellsElementsCount*6,GL_UNSIGNED_INT,0);
     VertexArrayBind(borderVa);
+    glUniform3f(0,0.3f,0.3f,0.3f);
     glDrawArrays(GL_LINES,0,grid->borderMap->count);
     glfwPollEvents();
   }
+  ShaderFree(shader);
+  VertexArrayFree(borderVa);
+  VertexArrayFree(gridVa);
+  GridFree(grid);
   glfwDestroyWindow(win);
   glfwTerminate();
   return 0;

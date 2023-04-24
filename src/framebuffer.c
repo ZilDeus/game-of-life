@@ -37,7 +37,7 @@ void FramebufferDrawBuffers(struct Framebuffer* fb,unsigned int buffersCount)
 void FramebufferRender(struct Framebuffer* fb,struct Shader* shader)
 {
   FramebufferActivate(fb);
-  UseShader(shader);
+  ShaderActivate(shader);
   glDrawArrays(GL_TRIANGLES,0,6);
 }
 
